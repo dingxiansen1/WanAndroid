@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">玩安卓</string>
+
+
+    <string name="home">主页</string>
+    <string name="project">项目</string>
+    <string name="author">公众号</string>
+    <string name="navigator">导航</string>
+
+    <string name="mine">我的</string>
+    <string name="register">注册</string>
+    <string name="login">登录</string>
+    <string name="logout">注销</string>
+    <string name="welcome_to_use">欢迎使用</string>
+    <string name="welcome_tips">账号服务由WanAndroid提供</string>
+    <string name="please_enter_a_password">请输入密码</string>
+    <string name="please_enter_a_account">请输入用户名</string>
+    <string name="login_tips">没有账号，注册一个？</string>
+
+
+    <string name="project_address">项目地址</string>
+    <string name="setting">设置</string>
+    <string name="collection">收藏</string>
+    <string name="browsing_history">浏览历史</string>
+    <string name="tool_list">工具列表</string>
+    <string name="points_ranking">积分排行</string>
+    <string name="theme">主题</string>
+    <string name="theme_tips">选择喜欢的主题颜色</string>
+    <string name="other">其他</string>
+    <string name="version">版本</string>
+    <string name="version_tips">当前版本号:</string>
+    <string name="follow_the_system">跟随系统</string>
+    <string name="follow_the_system_tips">跟随系统的白天黑夜模式切换</string>
+    <string name="night_mode">夜间模式</string>
+    <string name="night_mode_tips">深色主题,适合在夜间使用</string>
+    <string name="message">消息中心</string>
+    <string name="new_message">新消息</string>
+    <string name="un_read_message">已读消息</string>
+    <string name="square">广场</string>
+    <string name="interlocution">问答</string>
+    <string name="search">搜索</string>
+    <string name="share">分享</string>
+    <string name="hotSearch">热门搜索</string>
+    <string name="searchHistory">搜索历史</string>
+    <string name="series">体系</string>
+    <string name="tutorial">教程</string>
+    <string name="seriesDesc">体系详情</string>
+    <string name="tutorialDesc">教程详情</string>
+    <string name="network_exception_please_try_again">网络异常,请重试</string>
+</resources>

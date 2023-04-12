@@ -1,0 +1,480 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "25ae603fdd21d856a0fd0e828bec36fd",
+    "entities": [
+      {
+        "tableName": "article",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`databaseId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `articleType` INTEGER NOT NULL, `adminAdd` INTEGER NOT NULL, `apkLink` TEXT NOT NULL, `audit` INTEGER NOT NULL, `author` TEXT NOT NULL, `canEdit` INTEGER NOT NULL, `chapterId` INTEGER NOT NULL, `chapterName` TEXT NOT NULL, `collect` INTEGER NOT NULL, `courseId` INTEGER NOT NULL, `desc` TEXT NOT NULL, `descMd` TEXT NOT NULL, `envelopePic` TEXT NOT NULL, `fresh` INTEGER NOT NULL, `host` TEXT NOT NULL, `id` INTEGER NOT NULL, `adminAddtwo` INTEGER NOT NULL, `link` TEXT NOT NULL, `niceDate` TEXT NOT NULL, `niceShareDate` TEXT NOT NULL, `origin` TEXT NOT NULL, `prefix` TEXT NOT NULL, `projectLink` TEXT NOT NULL, `publishTime` INTEGER NOT NULL, `realSuperChapterId` INTEGER NOT NULL, `selfVisible` INTEGER NOT NULL, `shareDate` INTEGER NOT NULL, `shareUser` TEXT NOT NULL, `superChapterId` INTEGER NOT NULL, `superChapterName` TEXT, `tags` TEXT NOT NULL, `title` TEXT NOT NULL, `type` INTEGER NOT NULL, `userId` INTEGER NOT NULL, `visible` INTEGER NOT NULL, `zan` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "databaseId",
+            "columnName": "databaseId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "articleType",
+            "columnName": "articleType",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "adminAdd",
+            "columnName": "adminAdd",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "apkLink",
+            "columnName": "apkLink",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "audit",
+            "columnName": "audit",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "author",
+            "columnName": "author",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "canEdit",
+            "columnName": "canEdit",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chapterId",
+            "columnName": "chapterId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chapterName",
+            "columnName": "chapterName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "collect",
+            "columnName": "collect",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "courseId",
+            "columnName": "courseId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "desc",
+            "columnName": "desc",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descMd",
+            "columnName": "descMd",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "envelopePic",
+            "columnName": "envelopePic",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fresh",
+            "columnName": "fresh",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "host",
+            "columnName": "host",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "adminAddtwo",
+            "columnName": "adminAddtwo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "link",
+            "columnName": "link",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "niceDate",
+            "columnName": "niceDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "niceShareDate",
+            "columnName": "niceShareDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "origin",
+            "columnName": "origin",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "prefix",
+            "columnName": "prefix",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "projectLink",
+            "columnName": "projectLink",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "publishTime",
+            "columnName": "publishTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "realSuperChapterId",
+            "columnName": "realSuperChapterId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "selfVisible",
+            "columnName": "selfVisible",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shareDate",
+            "columnName": "shareDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shareUser",
+            "columnName": "shareUser",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "superChapterId",
+            "columnName": "superChapterId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "superChapterName",
+            "columnName": "superChapterName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tags",
+            "columnName": "tags",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visible",
+            "columnName": "visible",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "zan",
+            "columnName": "zan",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "databaseId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_article_articleType_courseId",
+            "unique": false,
+            "columnNames": [
+              "articleType",
+              "courseId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_article_articleType_courseId` ON `${TABLE_NAME}` (`articleType`, `courseId`)"
+          },
+          {
+            "name": "index_article_articleType",
+            "unique": false,
+            "columnNames": [
+              "articleType"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_article_articleType` ON `${TABLE_NAME}` (`articleType`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "remote_key",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`articleType` INTEGER NOT NULL, `nextKey` INTEGER, PRIMARY KEY(`articleType`))",
+        "fields": [
+          {
+            "fieldPath": "articleType",
+            "columnName": "articleType",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nextKey",
+            "columnName": "nextKey",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "articleType"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_remote_key_articleType",
+            "unique": true,
+            "columnNames": [
+              "articleType"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_remote_key_articleType` ON `${TABLE_NAME}` (`articleType`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "searchHistory",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `time` INTEGER NOT NULL, PRIMARY KEY(`key`))",
+        "fields": [
+          {
+            "fieldPath": "key",
+            "columnName": "key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "key"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "collect_article",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`databaseId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `author` TEXT NOT NULL, `chapterId` INTEGER NOT NULL, `chapterName` TEXT NOT NULL, `courseId` INTEGER NOT NULL, `desc` TEXT NOT NULL, `envelopePic` TEXT NOT NULL, `id` INTEGER NOT NULL, `link` TEXT NOT NULL, `niceDate` TEXT NOT NULL, `origin` TEXT NOT NULL, `originId` INTEGER NOT NULL, `publishTime` INTEGER NOT NULL, `title` TEXT NOT NULL, `userId` INTEGER NOT NULL, `visible` INTEGER NOT NULL, `zan` INTEGER NOT NULL, `collect` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "databaseId",
+            "columnName": "databaseId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "author",
+            "columnName": "author",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chapterId",
+            "columnName": "chapterId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chapterName",
+            "columnName": "chapterName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "courseId",
+            "columnName": "courseId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "desc",
+            "columnName": "desc",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "envelopePic",
+            "columnName": "envelopePic",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "link",
+            "columnName": "link",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "niceDate",
+            "columnName": "niceDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "origin",
+            "columnName": "origin",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "originId",
+            "columnName": "originId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "publishTime",
+            "columnName": "publishTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visible",
+            "columnName": "visible",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "zan",
+            "columnName": "zan",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "collect",
+            "columnName": "collect",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "databaseId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "collect_remote_key",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`databaseId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nextKey` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "databaseId",
+            "columnName": "databaseId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nextKey",
+            "columnName": "nextKey",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "databaseId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '25ae603fdd21d856a0fd0e828bec36fd')"
+    ]
+  }
+}

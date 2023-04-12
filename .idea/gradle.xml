@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/../CommonDemo/versionPlugin" name="versionPlugin">
+                <projects>
+                  <project path="$PROJECT_DIR$/../CommonDemo/versionPlugin" />
+                  <project path="$PROJECT_DIR$/../CommonDemo/versionPlugin/convention" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../CommonDemo/BasicCompose" />
+            <option value="$PROJECT_DIR$/../CommonDemo/Common" />
+            <option value="$PROJECT_DIR$/../CommonDemo/Net" />
+            <option value="$PROJECT_DIR$/../CommonDemo/Utils" />
+            <option value="$PROJECT_DIR$/../CommonDemo/versionPlugin" />
+            <option value="$PROJECT_DIR$/../CommonDemo/versionPlugin/convention" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/common" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
