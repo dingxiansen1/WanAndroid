@@ -164,7 +164,7 @@ fun MineScreen(
                     ) {
                         nav.go(
                             RouteName.webArguments(
-                                "https://github.com/dingxiansen1/Wan-Android",
+                                "https://github.com/dingxiansen1/WanAndroid",
                                 "项目地址"
                             )
                         )
