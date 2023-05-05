@@ -18,22 +18,39 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.android.dd.wanandroidcompose.R
-import com.android.dd.wanandroidcompose.constant.RouteName
+import com.android.dd.wanandroidcompose.ui.search.result.navigation.navigateToSearchResult
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.ext.clickableNoRipple
-import com.dd.basiccompose.navigation.go
 import com.dd.basiccompose.widget.SearchBar
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+
 @Composable
-fun SearchScreen(
+internal fun SearchRoute(
     viewModel: SearchViewModel = hiltViewModel(),
     nav: NavHostController = LocalNavController.current
 ) {
-
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val searchKey by viewModel.searchKey.collectAsStateWithLifecycle()
+    SearchScreen(
+        uiState = uiState,
+        searchKey = searchKey,
+        navigateUp = nav::navigateUp,
+        updateSearchKey = viewModel::updateSearchKey,
+        addSearchHistory = viewModel::addSearchHistory,
+        navigateToSearchResult = nav::navigateToSearchResult,
+    )
+}
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@Composable
+internal fun SearchScreen(
+    uiState: SearchUiState,
+    searchKey: String,
+    navigateUp: () -> Unit,
+    updateSearchKey: (String) -> Unit,
+    addSearchHistory: (String) -> Unit,
+    navigateToSearchResult: (String) -> Unit,
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.background,
@@ -45,7 +62,7 @@ fun SearchScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 IconButton(onClick = {
-                    nav.navigateUp()
+                    navigateUp.invoke()
                 }) {
                     Icon(
                         Icons.Outlined.ArrowBack,
@@ -58,7 +75,7 @@ fun SearchScreen(
                         .weight(0.7f)
                 ) {
                     SearchBar(text = searchKey, onTextChanged = {
-                        viewModel.updateSearchKey(it)
+                        updateSearchKey.invoke(it)
                     })
                 }
                 Text(
@@ -67,8 +84,8 @@ fun SearchScreen(
                     modifier = Modifier
                         .padding(horizontal = 16.dp, vertical = 8.dp)
                         .clickableNoRipple {
-                            viewModel.addSearchHistory()
-                            nav.go(RouteName.searchResultArguments(searchKey))
+                            addSearchHistory.invoke(searchKey)
+                            navigateToSearchResult.invoke(searchKey)
                         }
                 )
             }
@@ -94,8 +111,8 @@ fun SearchScreen(
                                 .padding(horizontal = 8.dp, vertical = 8.dp)
                                 .clip(RoundedCornerShape(16.dp))
                                 .clickable {
-                                    viewModel.addSearchHistory(hotKey.name)
-                                    nav.go(RouteName.searchResultArguments(hotKey.name))
+                                    addSearchHistory.invoke(hotKey.name)
+                                    navigateToSearchResult.invoke(hotKey.name)
                                 },
                             shape = RoundedCornerShape(16.dp),
                             color =
@@ -138,8 +155,8 @@ fun SearchScreen(
                                 .padding(horizontal = 8.dp, vertical = 8.dp)
                                 .clip(RoundedCornerShape(16.dp))
                                 .clickable {
-                                    viewModel.addSearchHistory(key.key)
-                                    nav.go(RouteName.searchResultArguments(key.key))
+                                    addSearchHistory.invoke(key.key)
+                                    navigateToSearchResult.invoke(key.key)
                                 },
                             shape = RoundedCornerShape(16.dp),
                             color = MaterialTheme.colorScheme.primaryContainer,

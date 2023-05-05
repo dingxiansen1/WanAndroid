@@ -15,7 +15,6 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
-import com.android.dd.wanandroidcompose.data.ToastData
 import com.android.dd.wanandroidcompose.ui.home.main.ArticleItem
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.navigation.go
@@ -28,7 +27,7 @@ import kotlinx.coroutines.launch
 fun InterlocutorScreen(
     viewModel: InterlocutorViewModel = hiltViewModel(),
     nav: NavHostController = LocalNavController.current,
-    showToast: (ToastData) -> Unit = {},
+    showToast: (String) -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val pagingData = uiState.pagingData.collectAsLazyPagingItems()
@@ -70,7 +69,7 @@ fun InterlocutorScreen(
                         if (AccountManager.isLogin) {
                             viewModel.collection(item)
                         } else {
-                            showToast.invoke(ToastData(true, "请先登录~"))
+                            showToast.invoke("请先登录~")
                         }
                     }
                 )

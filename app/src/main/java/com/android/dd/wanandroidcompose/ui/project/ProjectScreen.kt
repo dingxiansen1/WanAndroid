@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.android.dd.wanandroidcompose.data.ToastData
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -23,7 +22,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 @Composable
 fun ProjectScreen(
     viewModel: ProjectViewModel = hiltViewModel(),
-    showToast: (ToastData) -> Unit = {},
+    showToast: (String) -> Unit = {},
 ) {
     val titles by viewModel.uiState.collectAsStateWithLifecycle()
     val pagerState = rememberPagerState()

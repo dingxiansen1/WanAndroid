@@ -1,10 +1,12 @@
 package com.android.dd.wanandroidcompose.net.interceptor
 
-import com.dd.common.utils.DataStoreUtils
+import com.android.dd.wanandroidcompose.data.AppDataStore
+import com.dd.common.utils.CoroutineUtils
+import kotlinx.coroutines.launch
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class CacheCookieInterceptor: Interceptor {
+class CacheCookieInterceptor : Interceptor {
 
     private val loginUrl = "user/login"
     private val registerUrl = "user/register"
@@ -19,13 +21,16 @@ class CacheCookieInterceptor: Interceptor {
             val cookies = response.headers(SET_COOKIE_KEY)
             if (cookies.isNotEmpty()) {
                 //cookie可能有多个，都保存下来
-                DataStoreUtils.putSyncData(domain, encodeCookie(cookies))
+                CoroutineUtils.getAppCoroutine().launch {
+                    AppDataStore.cookie.set(encodeCookie(cookies))
+                }
             }
         }
         return response
     }
 
-    private fun aboutUser(url: String): Boolean = url.contains(loginUrl) or url.contains(registerUrl)
+    private fun aboutUser(url: String): Boolean =
+        url.contains(loginUrl) or url.contains(registerUrl)
 }
 
 /**

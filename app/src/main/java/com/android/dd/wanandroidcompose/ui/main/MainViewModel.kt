@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.R
 import com.android.dd.wanandroidcompose.constant.RouteName
-import com.android.dd.wanandroidcompose.data.ToastData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -23,27 +22,27 @@ class MainViewModel @Inject constructor(
 
     val mainNavigationBarItem = arrayListOf(
         NavigationBarItemData(
-            RouteName.MainRoute.Home,
+            RouteName.MainNavItem.Home,
             Icons.Outlined.Home,
             R.string.home
         ),
         NavigationBarItemData(
-            RouteName.MainRoute.Project,
+            RouteName.MainNavItem.Project,
             Icons.Outlined.Dehaze,
             R.string.project
         ),
         NavigationBarItemData(
-            RouteName.MainRoute.Author,
+            RouteName.MainNavItem.Author,
             Icons.Outlined.Group,
             R.string.author
         ),
         NavigationBarItemData(
-            RouteName.MainRoute.Navigator,
+            RouteName.MainNavItem.Navigator,
             Icons.Outlined.NearMe,
             R.string.navigator
         ),
         NavigationBarItemData(
-            RouteName.MainRoute.Mine,
+            RouteName.MainNavItem.Mine,
             Icons.Outlined.Person,
             R.string.mine
         ),
@@ -55,18 +54,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun showToast(toastData: ToastData) {
-        uiState.value = uiState.value.copy(toastMsg = toastData)
-    }
-
-    fun closeToast() {
-        uiState.value = uiState.value.copy(toastMsg = ToastData(false, ""))
-    }
-
 }
 
 data class MainUiState(
-    val toastMsg: ToastData = ToastData(),
     val selectIndex: Int = 0,
 )
 

@@ -2,13 +2,9 @@ package com.android.dd.wanandroidcompose.constant
 
 
 object RouteName {
-    const val Main = "Main"
     const val SeriesDesc = "SeriesDesc"
     const val TutorialDesc = "TutorialDesc"
-    const val SearchResult = "SearchResult"
-    const val Search = "Search"
     const val Web = "Web"
-    const val Login = "Login"
     const val Collection = "Collection"
     const val History = "History"
     const val Tool = "Tool"
@@ -20,7 +16,7 @@ object RouteName {
         const val cid = "cid"
     }
 
-    object MainRoute {
+    object MainNavItem {
         const val Home = "Home"
         const val Project = "Project"
         const val Author = "Author"
@@ -28,11 +24,6 @@ object RouteName {
         const val Mine = "Mine"
     }
 
-    fun searchResultArguments(
-        key: String,
-    ): String {
-        return SearchResult + "?key=${key}"
-    }
 
     fun seriesDescArguments(
         cid: Int,

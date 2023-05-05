@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.constant.RouteName
-import com.android.dd.wanandroidcompose.data.ToastData
 import com.android.dd.wanandroidcompose.data.appRoom
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.data.entity.SearchHistory
@@ -55,18 +54,10 @@ class SearchResultViewModel @Inject constructor(
         }
     }
 
-    fun showToast(toastData: ToastData) {
-        uiState.value = uiState.value.copy(toastMsg = toastData)
-    }
-
-    fun closeToast() {
-        uiState.value = uiState.value.copy(toastMsg = ToastData(false, ""))
-    }
 }
 
 data class SearchResultUiState(
     val searchKey: String = "",
     val pagingData: Flow<PagingData<Article>>,
     val lazyListState: LazyListState = LazyListState(),
-    val toastMsg: ToastData = ToastData(),
 )

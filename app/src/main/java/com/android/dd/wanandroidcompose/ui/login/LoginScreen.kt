@@ -36,31 +36,47 @@ import coil.compose.AsyncImage
 import com.android.dd.wanandroidcompose.R
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.ext.clickableNoRipple
-import kotlinx.coroutines.launch
+
+@Composable
+fun LoginRoute(
+    viewModel: LoginViewModel = hiltViewModel(),
+    nav: NavHostController = LocalNavController.current,
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val snackbarHostState = remember { SnackbarHostState() }
+    LaunchedEffect(Unit) {
+        viewModel.toastMsg.collect {
+            snackbarHostState.showSnackbar(
+                it
+            )
+        }
+    }
+    LoginScreen(
+        uiState = uiState,
+        snackbarHostState = snackbarHostState,
+        navigateUp = nav::navigateUp,
+        updateAccount = viewModel::updateAccount,
+        updatePassword = viewModel::updatePassword,
+        updateLoginState = viewModel::updateLoginState,
+        login = viewModel::login,
+    )
+}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel = hiltViewModel(),
-    nav: NavHostController = LocalNavController.current,
+    uiState: LoginUiState,
+    snackbarHostState: SnackbarHostState,
+    navigateUp: () -> Unit,
+    updateAccount: (String) -> Unit,
+    updatePassword: (String) -> Unit,
+    updateLoginState: () -> Unit,
+    login: () -> Unit,
 ) {
-
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val snackbarHostState = remember { SnackbarHostState() }
-    val scope = rememberCoroutineScope()
     LaunchedEffect(key1 = uiState.login) {
         if (uiState.login) {
-            nav.navigateUp()
-        }
-    }
-    LaunchedEffect(key1 = uiState.toastMsg) {
-        if (uiState.toastMsg.showToast && uiState.toastMsg.msg.isNotEmpty()) {
-            scope.launch {
-                snackbarHostState.showSnackbar(
-                    uiState.toastMsg.msg
-                )
-            }
-            viewModel.closeToast()
+            navigateUp.invoke()
         }
     }
     Scaffold(
@@ -80,7 +96,7 @@ fun LoginScreen(
                 IconButton(
                     modifier = Modifier.size(56.dp),
                     onClick = {
-                        nav.navigateUp()
+                        navigateUp.invoke()
                     }
                 ) {
                     Icon(
@@ -125,7 +141,7 @@ fun LoginScreen(
                 leadingIcon = R.mipmap.ic_account_normal,
                 keyboardType = KeyboardType.Email
             ) { account ->
-                viewModel.updateAccount(account)
+                updateAccount.invoke(account)
             }
 
             Input(
@@ -135,7 +151,7 @@ fun LoginScreen(
                 keyboardType = KeyboardType.Password,
                 isPassword = true
             ) { password ->
-                viewModel.updatePassword(password)
+                updatePassword.invoke(password)
             }
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -148,7 +164,7 @@ fun LoginScreen(
                 Checkbox(
                     checked = uiState.isRegisterState,
                     onCheckedChange = {
-                        viewModel.updateLoginState()
+                        updateLoginState.invoke()
                     },
                     colors = CheckboxDefaults.colors(
                         checkedColor = MaterialTheme.colorScheme.primary,
@@ -175,7 +191,7 @@ fun LoginScreen(
                     )
                     .clip(shape = RoundedCornerShape(20.dp))
                     .clickable {
-                        viewModel.login()
+                        login.invoke()
                     },
                 contentAlignment = Alignment.Center
             ) {

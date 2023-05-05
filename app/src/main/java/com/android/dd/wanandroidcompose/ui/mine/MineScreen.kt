@@ -15,7 +15,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -25,8 +24,8 @@ import com.android.dd.wanandroidcompose.R
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
 import com.android.dd.wanandroidcompose.data.AccountState
-import com.android.dd.wanandroidcompose.data.ToastData
 import com.android.dd.wanandroidcompose.data.isLogin
+import com.android.dd.wanandroidcompose.ui.login.navigation.navigateToLogin
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.ext.clickableNoRipple
 import com.dd.basiccompose.navigation.go
@@ -36,7 +35,7 @@ import com.dd.basiccompose.navigation.go
 fun MineScreen(
     viewModel: MineViewModel = hiltViewModel(),
     nav: NavHostController = LocalNavController.current,
-    showToast: (ToastData) -> Unit = {},
+    showToast: (String) -> Unit = {},
 ) {
     val accountState by viewModel.accountState.collectAsStateWithLifecycle()
     val scrollState = rememberScrollState()
@@ -71,7 +70,7 @@ fun MineScreen(
                     .height(150.dp)
                     .clickableNoRipple {
                         if (!accountState.isLogin) {
-                            nav.go(RouteName.Login)
+                            nav.navigateToLogin()
                         }
                     }
             ) {
@@ -117,7 +116,7 @@ fun MineScreen(
                         if (AccountManager.isLogin) {
                             nav.go(RouteName.Message)
                         } else {
-                            showToast.invoke(ToastData(true, "请先登录~"))
+                            showToast.invoke("请先登录~")
                         }
                     }
 
@@ -128,7 +127,7 @@ fun MineScreen(
                         if (AccountManager.isLogin) {
                             nav.go(RouteName.Collection)
                         } else {
-                            showToast.invoke(ToastData(true, "请先登录~"))
+                            showToast.invoke("请先登录~")
                         }
                     }
                     MineRowItem(
@@ -163,7 +162,12 @@ fun MineScreen(
                         Icons.Outlined.Cloud,
                         stringResource(id = R.string.project_address)
                     ) {
-                        nav.go(RouteName.webArguments("https://github.com/dingxiansen1/Wan-Android","项目地址"))
+                        nav.go(
+                            RouteName.webArguments(
+                                "https://github.com/dingxiansen1/Wan-Android",
+                                "项目地址"
+                            )
+                        )
                     }
 
                     MineColumnItem(

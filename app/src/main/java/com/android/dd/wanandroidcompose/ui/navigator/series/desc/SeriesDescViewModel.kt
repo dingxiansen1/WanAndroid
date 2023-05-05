@@ -7,7 +7,6 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.constant.RouteName
-import com.android.dd.wanandroidcompose.data.ToastData
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.ui.collection.CollectionRepository
 import com.android.dd.wanandroidcompose.ui.navigator.series.SeriesRepository
@@ -38,18 +37,9 @@ class SeriesDescViewModel @Inject constructor(
             collectionRepository.collectArticle(article)
         }
     }
-
-    fun showToast(toastData: ToastData) {
-        uiState.value = uiState.value.copy(toastMsg = toastData)
-    }
-
-    fun closeToast() {
-        uiState.value = uiState.value.copy(toastMsg = ToastData(false, ""))
-    }
 }
 
 data class SeriesDescUiState(
     val pagingData: Flow<PagingData<Article>>,
     val lazyListState: LazyListState = LazyListState(),
-    val toastMsg: ToastData = ToastData(),
 )

@@ -23,19 +23,19 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.android.dd.wanandroidcompose.AppViewModel
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
 import com.android.dd.wanandroidcompose.data.AccountState
 import com.android.dd.wanandroidcompose.ui.collection.CollectionScreen
 import com.android.dd.wanandroidcompose.ui.history.HistoryScreen
-import com.android.dd.wanandroidcompose.ui.login.LoginScreen
-import com.android.dd.wanandroidcompose.ui.main.MainScreen
+import com.android.dd.wanandroidcompose.ui.login.navigation.loginScreen
+import com.android.dd.wanandroidcompose.ui.main.navigation.MainNavigationRoute
+import com.android.dd.wanandroidcompose.ui.main.navigation.mainScreen
 import com.android.dd.wanandroidcompose.ui.message.MessageScreen
 import com.android.dd.wanandroidcompose.ui.navigator.series.desc.SeriesDescScreen
 import com.android.dd.wanandroidcompose.ui.navigator.tutorial.desc.TutorialDescScreen
-import com.android.dd.wanandroidcompose.ui.search.SearchScreen
-import com.android.dd.wanandroidcompose.ui.search.result.SearchResultScreen
+import com.android.dd.wanandroidcompose.ui.search.result.navigation.searchResultScreen
+import com.android.dd.wanandroidcompose.ui.search.navigation.searchScreen
 import com.android.dd.wanandroidcompose.ui.setting.SettingScreen
 import com.android.dd.wanandroidcompose.ui.tool.ToolScreen
 import com.android.dd.wanandroidcompose.ui.web.WebScreen
@@ -96,20 +96,13 @@ class MainActivity : AppCompatActivity() {
         val navController = LocalNavController.current
         NavHost(
             navController = navController,
-            startDestination = RouteName.Main
+            startDestination = MainNavigationRoute
         ) {
             //主页面
-            composable(RouteName.Main) {
-                MainScreen()
-            }
-            //主页面
-            composable(RouteName.Login) {
-                LoginScreen()
-            }
-            //搜索
-            composable(RouteName.Search) {
-                SearchScreen()
-            }
+            mainScreen()
+
+            loginScreen()
+
             //消息中心
             composable(RouteName.Setting) {
                 SettingScreen()
@@ -132,15 +125,10 @@ class MainActivity : AppCompatActivity() {
             composable(RouteName.Message) {
                 MessageScreen()
             }
+            //搜索
+            searchScreen()
             //搜索结果
-            composable(
-                RouteName.SearchResult + "?key={key}",
-                arguments = listOf(
-                    navArgument(RouteName.Arguments.key) { type = NavType.StringType },
-                )
-            ) {
-                SearchResultScreen()
-            }
+            searchResultScreen()
             //Web页面
             composable(
                 route = RouteName.Web + "?link={link}&title={title}",

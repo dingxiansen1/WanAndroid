@@ -17,7 +17,6 @@ import androidx.paging.compose.itemsIndexed
 import com.android.dd.wanandroidcompose.R
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
-import com.android.dd.wanandroidcompose.data.ToastData
 import com.android.dd.wanandroidcompose.ui.home.main.ArticleItem
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.navigation.go
@@ -39,15 +38,11 @@ fun SeriesDescScreen(
     }
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
-
-    LaunchedEffect(key1 = uiState.toastMsg) {
-        if (uiState.toastMsg.showToast && uiState.toastMsg.msg.isNotEmpty()) {
-            scope.launch {
-                snackbarHostState.showSnackbar(
-                    uiState.toastMsg.msg
-                )
-            }
-            viewModel.closeToast()
+    LaunchedEffect(Unit) {
+        viewModel.toastMsg.collect {
+            snackbarHostState.showSnackbar(
+                it
+            )
         }
     }
 
@@ -90,7 +85,7 @@ fun SeriesDescScreen(
                             if (AccountManager.isLogin) {
                                 viewModel.collection(item)
                             } else {
-                                viewModel.showToast(ToastData(true, "请先登录~"))
+                                viewModel.showToast("请先登录~")
                             }
                         }
                     )

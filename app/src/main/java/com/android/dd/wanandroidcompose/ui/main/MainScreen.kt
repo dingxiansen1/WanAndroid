@@ -14,11 +14,9 @@ import com.android.dd.wanandroidcompose.ui.home.HomeMainScreen
 import com.android.dd.wanandroidcompose.ui.mine.MineScreen
 import com.android.dd.wanandroidcompose.ui.navigator.NavigatorMainScreen
 import com.android.dd.wanandroidcompose.ui.project.ProjectScreen
-import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(
+fun MainRoute(
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val items = viewModel.mainNavigationBarItem
@@ -26,18 +24,34 @@ fun MainScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }
-    val scope = rememberCoroutineScope()
-
-    LaunchedEffect(key1 = uiState.toastMsg) {
-        if (uiState.toastMsg.showToast && uiState.toastMsg.msg.isNotEmpty()) {
-            scope.launch {
-                snackbarHostState.showSnackbar(
-                    uiState.toastMsg.msg
-                )
-            }
-            viewModel.closeToast()
+    LaunchedEffect(Unit) {
+        viewModel.toastMsg.collect {
+            snackbarHostState.showSnackbar(
+                it
+            )
         }
     }
+
+    MainScreen(
+        items = items,
+        uiState = uiState,
+        snackbarHostState = snackbarHostState,
+        showToast = viewModel::showToast,
+        updateSelectIndex = viewModel::updateSelectIndex,
+    )
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MainScreen(
+    items: List<NavigationBarItemData>,
+    uiState: MainUiState,
+    snackbarHostState: SnackbarHostState,
+    showToast: (String) -> Unit,
+    updateSelectIndex: (Int) -> Unit,
+) {
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
@@ -61,7 +75,7 @@ fun MainScreen(
                             )
                         },
                         selected = uiState.selectIndex == index,
-                        onClick = { viewModel.updateSelectIndex(index) }
+                        onClick = { updateSelectIndex.invoke(index) }
                     )
                 }
             }
@@ -71,20 +85,20 @@ fun MainScreen(
         Box(modifier = Modifier.padding(it)) {
             when (uiState.selectIndex) {
                 0 -> HomeMainScreen() {
-                    viewModel.showToast(it)
+                    showToast.invoke(it)
                 }
                 1 -> ProjectScreen() {
-                    viewModel.showToast(it)
+                    showToast.invoke(it)
                 }
                 2 -> AuthorScreen() {
-                    viewModel.showToast(it)
+                    showToast.invoke(it)
                 }
                 3 -> NavigatorMainScreen()
                 4 -> MineScreen() {
-                    viewModel.showToast(it)
+                    showToast.invoke(it)
                 }
                 else -> HomeMainScreen() {
-                    viewModel.showToast(it)
+                    showToast.invoke(it)
                 }
             }
         }

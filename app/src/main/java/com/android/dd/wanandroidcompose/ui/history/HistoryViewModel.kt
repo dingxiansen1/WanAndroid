@@ -7,7 +7,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.constant.RemoteKeyType
-import com.android.dd.wanandroidcompose.data.ToastData
 import com.android.dd.wanandroidcompose.data.appRoom
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.ui.collection.CollectionRepository
@@ -45,18 +44,9 @@ class HistoryViewModel @Inject constructor(
             collectionRepository.collectArticle(article)
         }
     }
-
-    fun showToast(toastData: ToastData) {
-        uiState.value = uiState.value.copy(toastMsg = toastData)
-    }
-
-    fun closeToast() {
-        uiState.value = uiState.value.copy(toastMsg = ToastData(false, ""))
-    }
 }
 
 data class HistoryUiState(
     val pagingData: Flow<PagingData<Article>>,
     val lazyListState: LazyListState = LazyListState(),
-    val toastMsg: ToastData = ToastData(),
 )

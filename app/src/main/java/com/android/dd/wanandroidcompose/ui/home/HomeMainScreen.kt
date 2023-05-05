@@ -1,7 +1,6 @@
 package com.android.dd.wanandroidcompose.ui.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -16,20 +15,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.android.dd.wanandroidcompose.R
-import com.android.dd.wanandroidcompose.constant.RouteName
-import com.android.dd.wanandroidcompose.data.ToastData
 import com.android.dd.wanandroidcompose.ui.home.interlocutor.InterlocutorScreen
 import com.android.dd.wanandroidcompose.ui.home.main.HomeScreen
 import com.android.dd.wanandroidcompose.ui.home.square.SquareScreen
+import com.android.dd.wanandroidcompose.ui.search.navigation.navigateToSearch
 import com.dd.basiccompose.controller.LocalNavController
-import com.dd.basiccompose.navigation.go
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeMainScreen(
     nav: NavHostController = LocalNavController.current,
-    showToast: (ToastData) -> Unit = {},
+    showToast: (String) -> Unit = {},
 ) {
     val pagerState = rememberPagerState(1)
     val tabTitle = arrayListOf(R.string.square, R.string.home, R.string.interlocution)
@@ -65,7 +62,7 @@ fun HomeMainScreen(
                     .align(Alignment.CenterEnd)
                     .padding(end = 16.dp),
                 onClick = {
-                    nav.go(RouteName.Search)
+                    nav.navigateToSearch()
                 },
             ) {
                 Icon(

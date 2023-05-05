@@ -21,7 +21,6 @@ import androidx.paging.compose.itemsIndexed
 import coil.compose.AsyncImage
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
-import com.android.dd.wanandroidcompose.data.ToastData
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.navigation.go
@@ -33,7 +32,7 @@ fun ProjectChileScreen(
     cid: Int,
     viewModel: ProjectChildViewModel = hiltViewModel(key = cid.toString()),
     nav: NavHostController = LocalNavController.current,
-    showToast: (ToastData) -> Unit = {},
+    showToast: (String) -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val pagingData = uiState.data?.collectAsLazyPagingItems()
@@ -58,7 +57,7 @@ fun ProjectChileScreen(
                             if (AccountManager.isLogin){
                                 viewModel.collection(item)
                             }else{
-                                showToast.invoke(ToastData(true,"请先登录~"))
+                                showToast.invoke("请先登录~")
                             }
                         }
                     )

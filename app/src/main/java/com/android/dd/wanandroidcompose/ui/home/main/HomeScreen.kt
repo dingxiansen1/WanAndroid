@@ -22,7 +22,6 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
-import com.android.dd.wanandroidcompose.data.ToastData
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.data.entity.HomeBanner
 import com.dd.basiccompose.controller.LocalNavController
@@ -38,7 +37,7 @@ import kotlinx.coroutines.launch
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     nav: NavHostController = LocalNavController.current,
-    showToast: (ToastData) -> Unit = {},
+    showToast: (String) -> Unit = {},
 ) {
     val banner by viewModel.banner.collectAsStateWithLifecycle()
     val uiState = viewModel.uiState.collectAsLazyPagingItems()
@@ -88,7 +87,7 @@ fun HomeScreen(
                         if (AccountManager.isLogin) {
                             viewModel.collection(item)
                         } else {
-                            showToast.invoke(ToastData(true, "请先登录~"))
+                            showToast.invoke("请先登录~")
                         }
                     }
                 )

@@ -3,9 +3,8 @@ package com.android.dd.wanandroidcompose.ui.login
 import androidx.lifecycle.viewModelScope
 import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.constant.Constant
-import com.android.dd.wanandroidcompose.data.ToastData
+import com.android.dd.wanandroidcompose.data.AppDataStore
 import com.android.dd.wanandroidcompose.data.serializer.user
-import com.dd.common.utils.DataStoreUtils
 import com.dd.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,9 +18,8 @@ class LoginViewModel @Inject constructor(
 
     var uiState = MutableStateFlow(
         LoginUiState(
-            DataStoreUtils.getSyncData(Constant.Account, ""),
-            DataStoreUtils.getSyncData(Constant.Password, ""),
-            false
+            AppDataStore.account.getSync() ?: "",
+            AppDataStore.password.getSync() ?: "",
         )
     )
 
@@ -40,7 +38,7 @@ class LoginViewModel @Inject constructor(
     fun login() {
         viewModelScope.launch {
             if (uiState.value.account.isEmpty() || uiState.value.password.isEmpty()) {
-                uiState.value = uiState.value.copy(toastMsg = ToastData(true, "账号或密码为空"))
+                showToast("账号或密码为空")
                 return@launch
             }
 
@@ -50,11 +48,11 @@ class LoginViewModel @Inject constructor(
                     Utils.getApp().user.updateData {
                         result.data!!
                     }
-                    DataStoreUtils.putData(Constant.Account, uiState.value.account)
-                    DataStoreUtils.putData(Constant.Password, uiState.value.password)
+                    AppDataStore.account.set(uiState.value.account)
+                    AppDataStore.password.set(uiState.value.password)
                     uiState.value = uiState.value.copy(login = true)
                 } else {
-                    uiState.value = uiState.value.copy(toastMsg = ToastData(true, result.errorMsg))
+                    showToast(result.errorMsg)
                 }
             } else {
                 val result = repository.register(uiState.value.account, uiState.value.password)
@@ -62,18 +60,14 @@ class LoginViewModel @Inject constructor(
                     Utils.getApp().user.updateData {
                         result.data!!
                     }
-                    DataStoreUtils.putData(Constant.Account, uiState.value.account)
-                    DataStoreUtils.putData(Constant.Password, uiState.value.password)
+                    AppDataStore.account.set(uiState.value.account)
+                    AppDataStore.password.set(uiState.value.password)
                     uiState.value = uiState.value.copy(login = true)
                 } else {
-                    uiState.value = uiState.value.copy(toastMsg = ToastData(true, result.errorMsg))
+                    showToast(result.errorMsg)
                 }
             }
         }
-    }
-
-    fun closeToast() {
-        uiState.value = uiState.value.copy(toastMsg = ToastData(false, ""))
     }
 }
 
@@ -81,6 +75,5 @@ data class LoginUiState(
     val account: String = "",
     val password: String = "",
     val isRegisterState: Boolean = false,
-    val toastMsg: ToastData = ToastData(),
     val login: Boolean = false,
 )
