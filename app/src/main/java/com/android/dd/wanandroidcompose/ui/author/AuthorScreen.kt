@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.ExperimentalFoundationApi
+import com.android.dd.wanandroidcompose.ui.author.child.AuthorChileScreen
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -60,7 +61,10 @@ fun AuthorScreen(
                 // Add 16.dp padding to 'center' the pages
                 contentPadding = PaddingValues(0.dp), modifier = Modifier
                     .weight(1f)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                key = {
+                    titles[it].id
+                }
             ) { page ->
                 AuthorChileScreen(titles[page].id){
                     showToast.invoke(it)

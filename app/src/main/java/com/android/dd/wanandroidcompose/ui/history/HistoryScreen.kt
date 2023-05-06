@@ -17,7 +17,7 @@ import com.android.dd.wanandroidcompose.R
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
 import com.android.dd.wanandroidcompose.ui.home.main.ArticleItem
-import com.android.dd.wanandroidcompose.ui.project.ArticleProjectItem
+import com.android.dd.wanandroidcompose.ui.project.child.ArticleProjectItem
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.navigation.go
 import com.dd.basiccompose.widget.DefaultList

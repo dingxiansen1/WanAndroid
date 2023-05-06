@@ -64,7 +64,10 @@ fun NavigatorMainScreen() {
             // Add 16.dp padding to 'center' the pages
             contentPadding = PaddingValues(0.dp),
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            key = {
+                tabTitle[it]
+            }
         ) { page ->
             when (page) {
                 0 -> NavigatorScreen()

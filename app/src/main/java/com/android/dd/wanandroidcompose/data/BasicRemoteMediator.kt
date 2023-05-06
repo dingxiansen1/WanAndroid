@@ -75,7 +75,6 @@ class BasicRemoteMediator(
                         nextKey = nextKey,
                     )
                 )
-                LogUtils.d("BasicRemoteMediator",data)
                 appRoom.dao.addAll(data)
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)

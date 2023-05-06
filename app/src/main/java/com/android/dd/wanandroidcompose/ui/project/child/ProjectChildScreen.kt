@@ -1,10 +1,10 @@
-package com.android.dd.wanandroidcompose.ui.project
+package com.android.dd.wanandroidcompose.ui.project.child
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -54,9 +54,9 @@ fun ProjectChileScreen(
                             nav.go(RouteName.webArguments(item.link, item.title))
                         },
                         collectOnClick = {
-                            if (AccountManager.isLogin){
+                            if (AccountManager.isLogin) {
                                 viewModel.collection(item)
-                            }else{
+                            } else {
                                 showToast.invoke("请先登录~")
                             }
                         }
