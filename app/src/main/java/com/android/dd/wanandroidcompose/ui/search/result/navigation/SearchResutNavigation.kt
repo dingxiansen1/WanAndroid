@@ -5,17 +5,16 @@ import androidx.navigation.compose.composable
 import com.android.dd.wanandroidcompose.ui.search.result.SearchResultScreen
 
 
-const val SearchResultNavigationArg = "?key={key}"
 const val SearchResultNavigationRoute = "search_result_route"
-const val key = "key"
+const val arg = "key"
 
 fun NavController.navigateToSearchResult(key: String, navOptions: NavOptions? = null) {
-    this.navigate("$SearchResultNavigationRoute?key={$key}", navOptions)
+    this.navigate("$SearchResultNavigationRoute?key=$key", navOptions)
 }
 
 fun NavGraphBuilder.searchResultScreen() {
     composable(
-        route = SearchResultNavigationRoute + SearchResultNavigationArg,
+        route = SearchResultNavigationRoute +"?key={key}",
         arguments = listOf(
             navArgument(key) { type = NavType.StringType },
         )

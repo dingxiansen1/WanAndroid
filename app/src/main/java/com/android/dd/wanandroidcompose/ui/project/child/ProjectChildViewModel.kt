@@ -22,18 +22,18 @@ class ProjectChildViewModel @Inject constructor(
     var uiState = MutableStateFlow(ProjectChildUiState())
         private set
 
-    fun getPaging(cid: Int) {
+    fun getPaging(cid :Int) {
         uiState.value = uiState.value.copy(data = repository.getPager(cid))
     }
 
-    fun collection(article: Article) {
+    fun collection(article: Article){
         viewModelScope.launch {
             collectionRepository.collectArticle(article)
         }
     }
 }
 
-data class ProjectChildUiState(
+data class ProjectChildUiState (
     val data: Flow<PagingData<Article>>? = null,
     val lazyListState: LazyListState = LazyListState(),
 )
