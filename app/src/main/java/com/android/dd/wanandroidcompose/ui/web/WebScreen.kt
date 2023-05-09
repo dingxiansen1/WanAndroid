@@ -8,10 +8,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.android.dd.wanandroidcompose.R
 import com.android.dd.wanandroidcompose.constant.RemoteKeyType
-import com.android.dd.wanandroidcompose.data.appRoom
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.widget.WebViewScreen
 
@@ -20,17 +20,18 @@ fun WebScreen(
     webUrl: String,
     title: String?,
     navCtrl: NavHostController = LocalNavController.current,
+    viewModel: WebViewModel = hiltViewModel()
 ) {
     var menuState by remember {
         mutableStateOf(false)
     }
     LaunchedEffect(webUrl) {
-        val article = appRoom.dao.queryByLink(webUrl)
+        val article = viewModel.queryByLink(webUrl)
         article?.let {
             //设为0视为未设置主键,就不会覆盖之前的，而是自增
             it.databaseId = 0
             it.articleType = RemoteKeyType.History
-            appRoom.dao.add(it)
+            viewModel.addHistory(it)
         }
     }
     WebViewScreen(webUrl = webUrl, title = title, navCtrl = navCtrl) {

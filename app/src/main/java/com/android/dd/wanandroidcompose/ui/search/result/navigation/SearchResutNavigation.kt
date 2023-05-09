@@ -6,7 +6,7 @@ import com.android.dd.wanandroidcompose.ui.search.result.SearchResultScreen
 
 
 const val SearchResultNavigationRoute = "search_result_route"
-const val arg = "key"
+const val key = "key"
 
 fun NavController.navigateToSearchResult(key: String, navOptions: NavOptions? = null) {
     this.navigate("$SearchResultNavigationRoute?key=$key", navOptions)

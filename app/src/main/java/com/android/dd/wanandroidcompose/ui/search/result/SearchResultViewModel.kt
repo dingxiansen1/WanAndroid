@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.constant.RouteName
-import com.android.dd.wanandroidcompose.data.appRoom
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.data.entity.SearchHistory
 import com.android.dd.wanandroidcompose.ui.collection.CollectionRepository
@@ -44,7 +43,7 @@ class SearchResultViewModel @Inject constructor(
 
     private fun addSearchHistory() {
         viewModelScope.launch {
-            appRoom.searchHistoryDao.add(SearchHistory(uiState.value.searchKey))
+            repository.addSearchHistory(SearchHistory(uiState.value.searchKey))
         }
     }
 

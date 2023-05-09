@@ -1,11 +1,12 @@
 package com.android.dd.wanandroidcompose.ui.search
 
+import androidx.datastore.core.DataStore
 import androidx.paging.*
-import com.android.dd.wanandroidcompose.data.appRoom
+import com.android.dd.wanandroidcompose.data.AppDatabase
 import com.android.dd.wanandroidcompose.data.entity.Article
-import com.android.dd.wanandroidcompose.data.serializer.hotKey
+import com.android.dd.wanandroidcompose.data.entity.HotKeyList
+import com.android.dd.wanandroidcompose.data.entity.SearchHistory
 import com.android.dd.wanandroidcompose.net.HttpService
-import com.dd.utils.Utils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -14,18 +15,20 @@ import javax.inject.Inject
 
 class SearchRepository @Inject constructor(
     private val service: HttpService,
+    private val hotKeyDataStore: DataStore<HotKeyList>,
+    private val appRoom: AppDatabase,
 ) {
 
 
     private val searchHistory = appRoom.searchHistoryDao.querySearchHistory()
 
-    private val hotKey = Utils.getApp().hotKey
+    private val hotKey = hotKeyDataStore
         .data
         .map {
             //如果本地存储数据为空，就去网络获取
             it.hotKey.ifEmpty {
                 val data = service.getSearchHotKey().data ?: emptyList()
-                Utils.getApp().hotKey.updateData {
+                hotKeyDataStore.updateData {
                     it.copy(hotKey = data)
                 }
                 data
@@ -70,5 +73,10 @@ class SearchRepository @Inject constructor(
             }
         ).flow
     }
+
+    suspend fun addSearchHistory(data :SearchHistory){
+        appRoom.searchHistoryDao.add(data)
+    }
+
 
 }

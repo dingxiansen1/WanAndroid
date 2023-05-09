@@ -9,11 +9,6 @@ import com.android.dd.wanandroidcompose.data.entity.*
 import com.dd.utils.Utils
 
 
-val appRoom by lazy {
-    AppDatabase.createDatabase(Utils.getApp())
-}
-
-
 @Database(
     version = 1,
     exportSchema = true,

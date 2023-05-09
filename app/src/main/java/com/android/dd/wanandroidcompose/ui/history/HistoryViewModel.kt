@@ -7,7 +7,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.constant.RemoteKeyType
-import com.android.dd.wanandroidcompose.data.appRoom
+import com.android.dd.wanandroidcompose.data.AppDatabase
+import com.android.dd.wanandroidcompose.data.dao.ArticleDao
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.ui.collection.CollectionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
-    private val collectionRepository: CollectionRepository
+    private val collectionRepository: CollectionRepository,
+    private val historyDao: ArticleDao,
 ) : BaseViewModel() {
 
     val uiState = MutableStateFlow(HistoryUiState(getPager()))
@@ -33,7 +35,7 @@ class HistoryViewModel @Inject constructor(
         return Pager(
             config = config,
             pagingSourceFactory = {
-                appRoom.dao.getPagingSource(RemoteKeyType.History)
+                historyDao.getPagingSource(RemoteKeyType.History)
             }
         ).flow
     }

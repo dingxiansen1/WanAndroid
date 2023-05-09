@@ -4,9 +4,9 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.android.dd.wanandroidcompose.data.BasicRemoteMediator
 import com.android.dd.wanandroidcompose.constant.RemoteKeyType
-import com.android.dd.wanandroidcompose.data.appRoom
+import com.android.dd.wanandroidcompose.data.AppDatabase
+import com.android.dd.wanandroidcompose.data.BasicRemoteMediator
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.net.HttpService
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +14,7 @@ import javax.inject.Inject
 
 class SquareRepository @Inject constructor(
     private var service: HttpService,
+    private val appRoom: AppDatabase,
 ) {
     @OptIn(ExperimentalPagingApi::class)
     fun getPager(): Flow<PagingData<Article>> {
@@ -25,7 +26,7 @@ class SquareRepository @Inject constructor(
         )
         return Pager(
             config = config,
-            remoteMediator = BasicRemoteMediator(RemoteKeyType.Square) {
+            remoteMediator = BasicRemoteMediator(RemoteKeyType.Square,appRoom) {
                 service.getSquareData(it).data?.datas ?: arrayListOf()
             },
             pagingSourceFactory = {

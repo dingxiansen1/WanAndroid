@@ -5,8 +5,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.android.dd.wanandroidcompose.constant.Constant
+import com.android.dd.wanandroidcompose.data.AppDatabase
 import com.android.dd.wanandroidcompose.data.CollectionRemoteMediator
-import com.android.dd.wanandroidcompose.data.appRoom
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.data.entity.CollectBean
 import com.android.dd.wanandroidcompose.net.HttpService
@@ -15,7 +15,8 @@ import javax.inject.Inject
 
 class CollectionRepository @Inject constructor(
     private val service: HttpService,
-    private val collectionRemoteMediator: CollectionRemoteMediator
+    private val collectionRemoteMediator: CollectionRemoteMediator,
+    private val appRoom: AppDatabase,
 ) {
 
     /**

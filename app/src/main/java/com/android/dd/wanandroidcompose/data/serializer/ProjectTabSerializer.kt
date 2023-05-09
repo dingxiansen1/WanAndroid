@@ -10,10 +10,8 @@ import com.dd.common.utils.JsonUtils
 import kotlinx.serialization.SerializationException
 import java.io.InputStream
 import java.io.OutputStream
-
-val Context.projectTab by dataStore(Constant.ProjectTab, serializer = ProjectTabSerializer)
-
-object ProjectTabSerializer : Serializer<ProjectTab> {
+import javax.inject.Inject
+class ProjectTabSerializer  @Inject constructor(): Serializer<ProjectTab> {
     override val defaultValue = ProjectTab()
 
     override suspend fun readFrom(input: InputStream): ProjectTab {

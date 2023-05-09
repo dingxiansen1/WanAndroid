@@ -10,10 +10,9 @@ import com.dd.common.utils.JsonUtils
 import kotlinx.serialization.SerializationException
 import java.io.InputStream
 import java.io.OutputStream
+import javax.inject.Inject
 
-val Context.hotKey by dataStore(Constant.HotKey, serializer = HotKeyListSerializer)
-
-object HotKeyListSerializer : Serializer<HotKeyList> {
+class HotKeyListSerializer  @Inject constructor(): Serializer<HotKeyList> {
     override val defaultValue = HotKeyList()
 
     override suspend fun readFrom(input: InputStream): HotKeyList {

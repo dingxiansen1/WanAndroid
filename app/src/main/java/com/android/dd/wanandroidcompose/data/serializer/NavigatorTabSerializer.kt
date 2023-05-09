@@ -10,10 +10,9 @@ import com.dd.common.utils.JsonUtils
 import kotlinx.serialization.SerializationException
 import java.io.InputStream
 import java.io.OutputStream
+import javax.inject.Inject
 
-val Context.navigatorTab by dataStore(Constant.NavigatorTab, serializer = NavigatorTabSerializer)
-
-object NavigatorTabSerializer : Serializer<NavigatorTab> {
+class NavigatorTabSerializer  @Inject constructor(): Serializer<NavigatorTab> {
     override val defaultValue = NavigatorTab()
 
     override suspend fun readFrom(input: InputStream): NavigatorTab {

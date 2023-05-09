@@ -16,6 +16,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class CollectionRemoteMediator @Inject constructor(
     private val service: HttpService,
+    private val appRoom: AppDatabase,
 ) : RemoteMediator<Int, CollectBean>() {
 
     override suspend fun load(

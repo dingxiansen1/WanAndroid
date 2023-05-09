@@ -2,7 +2,6 @@ package com.android.dd.wanandroidcompose.ui.search
 
 import androidx.lifecycle.viewModelScope
 import com.android.dd.wanandroidcompose.BaseViewModel
-import com.android.dd.wanandroidcompose.data.appRoom
 import com.android.dd.wanandroidcompose.data.entity.HotKey
 import com.android.dd.wanandroidcompose.data.entity.SearchHistory
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,7 +31,7 @@ class SearchViewModel @Inject constructor(
 
     fun addSearchHistory(key: String = searchKey.value) {
         viewModelScope.launch {
-            appRoom.searchHistoryDao.add(SearchHistory(key))
+            repository.addSearchHistory(SearchHistory(key))
         }
     }
 }

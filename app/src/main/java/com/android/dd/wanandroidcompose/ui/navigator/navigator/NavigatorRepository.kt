@@ -1,22 +1,23 @@
 package com.android.dd.wanandroidcompose.ui.navigator.navigator
 
-import com.android.dd.wanandroidcompose.data.serializer.navigatorTab
+import androidx.datastore.core.DataStore
+import com.android.dd.wanandroidcompose.data.entity.NavigatorTab
 import com.android.dd.wanandroidcompose.net.HttpService
-import com.dd.utils.Utils
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class NavigatorRepository @Inject constructor(
-    private var service: HttpService,
+    private val service: HttpService,
+    private val navigatorTabDataStore: DataStore<NavigatorTab>,
 ) {
 
-    val navigatorTab = Utils.getApp().navigatorTab
+    val navigatorTab = navigatorTabDataStore
         .data
         .map {
             //如果本地存储数据为空，就去网络获取
             it.navigatorTab.ifEmpty {
                 val data = service.getNavigationList().data ?: emptyList()
-                Utils.getApp().navigatorTab.updateData {
+                navigatorTabDataStore.updateData {
                     it.copy(navigatorTab = data)
                 }
                 data

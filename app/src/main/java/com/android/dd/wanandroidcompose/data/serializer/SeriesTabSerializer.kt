@@ -1,19 +1,14 @@
 package com.android.dd.wanandroidcompose.data.serializer
 
-import android.content.Context
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
-import androidx.datastore.dataStore
-import com.android.dd.wanandroidcompose.constant.Constant
 import com.android.dd.wanandroidcompose.data.entity.SeriesTab
 import com.dd.common.utils.JsonUtils
 import kotlinx.serialization.SerializationException
 import java.io.InputStream
 import java.io.OutputStream
-
-val Context.seriesTab by dataStore(Constant.SeriesTab, serializer = SeriesTabSerializer)
-
-object SeriesTabSerializer : Serializer<SeriesTab> {
+import javax.inject.Inject
+class SeriesTabSerializer  @Inject constructor(): Serializer<SeriesTab> {
     override val defaultValue = SeriesTab()
 
     override suspend fun readFrom(input: InputStream): SeriesTab {

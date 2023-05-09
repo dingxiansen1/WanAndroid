@@ -1,26 +1,26 @@
 package com.android.dd.wanandroidcompose.ui.navigator.series
 
+import androidx.datastore.core.DataStore
 import androidx.paging.*
 import com.android.dd.wanandroidcompose.data.entity.Article
-import com.android.dd.wanandroidcompose.data.serializer.seriesTab
+import com.android.dd.wanandroidcompose.data.entity.SeriesTab
 import com.android.dd.wanandroidcompose.net.HttpService
-import com.dd.utils.Utils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class SeriesRepository @Inject constructor(
-    private var service: HttpService,
+    private val service: HttpService,
+    private val seriesTabDataStore: DataStore<SeriesTab>,
 ) {
 
-
-    val seriesTab = Utils.getApp().seriesTab
+    val seriesTab = seriesTabDataStore
         .data
         .map {
             //如果本地存储数据为空，就去网络获取
             it.seriesTab.ifEmpty {
                 val data = service.getTreeList().data ?: emptyList()
-                Utils.getApp().seriesTab.updateData {
+                seriesTabDataStore.updateData {
                     it.copy(seriesTab = data)
                 }
                 data

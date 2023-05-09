@@ -1,11 +1,11 @@
 package com.android.dd.wanandroidcompose.ui.login
 
+import android.app.Application
 import androidx.lifecycle.viewModelScope
 import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.constant.Constant
 import com.android.dd.wanandroidcompose.data.AppDataStore
 import com.android.dd.wanandroidcompose.data.serializer.user
-import com.dd.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -13,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val repository: UserRepository
+    private val repository: UserRepository,
+    private val application: Application,
 ) : BaseViewModel() {
 
     var uiState = MutableStateFlow(
@@ -45,7 +46,7 @@ class LoginViewModel @Inject constructor(
             if (uiState.value.isRegisterState.not()) {
                 val result = repository.login(uiState.value.account, uiState.value.password)
                 if (result.errorCode == Constant.Succee && result.data != null) {
-                    Utils.getApp().user.updateData {
+                    application.user.updateData {
                         result.data!!
                     }
                     AppDataStore.account.set(uiState.value.account)
@@ -57,7 +58,7 @@ class LoginViewModel @Inject constructor(
             } else {
                 val result = repository.register(uiState.value.account, uiState.value.password)
                 if (result.errorCode == Constant.Succee && result.data != null) {
-                    Utils.getApp().user.updateData {
+                    application.user.updateData {
                         result.data!!
                     }
                     AppDataStore.account.set(uiState.value.account)

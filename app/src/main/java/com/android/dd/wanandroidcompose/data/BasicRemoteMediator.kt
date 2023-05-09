@@ -15,6 +15,7 @@ import com.dd.utils.log.LogUtils
 @OptIn(ExperimentalPagingApi::class)
 class BasicRemoteMediator(
     private val articleType: Int,
+    private val appRoom: AppDatabase,
     private val getData: suspend (Int) -> List<Article>,
 ) : RemoteMediator<Int, Article>() {
 
