@@ -52,4 +52,6 @@ class ProjectRepository @Inject constructor(
             }
         ).flow
     }
+
+    suspend fun getProjectPageList(page: Int, cid: Int) = service.getProjectPageList(page, cid)
 }

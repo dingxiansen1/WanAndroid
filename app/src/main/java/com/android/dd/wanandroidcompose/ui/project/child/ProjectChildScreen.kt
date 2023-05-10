@@ -31,7 +31,7 @@ internal fun ProjectChileScreen(
             lazyListState = pagingData.rememberLazyListState(),
             modifier = Modifier.fillMaxSize(),
         ) {
-            itemsIndexed(pagingData, { index, item -> item.databaseId }) { index, item ->
+            itemsIndexed(pagingData, { index, item -> item.id }) { index, item ->
                 item?.run {
                     ArticleProjectItem(
                         item,
