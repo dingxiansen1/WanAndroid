@@ -22,6 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.android.dd.wanandroidcompose.constant.RouteName
+import com.android.dd.wanandroidcompose.ui.web.navigation.navigateToWeb
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.navigation.go
 import kotlinx.coroutines.launch
@@ -123,7 +124,7 @@ fun NavigatorScreen(
                                         .clip(RoundedCornerShape(16.dp))
                                         .clickable {
                                             if (it.link.isNotEmpty()) {
-                                                nav.go(RouteName.webArguments(it.link, it.title))
+                                                nav.navigateToWeb(it.link, it.title)
                                             }
                                         },
                                     shape = RoundedCornerShape(16.dp),

@@ -6,72 +6,52 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
-import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import coil.compose.AsyncImage
-import com.android.dd.wanandroidcompose.constant.RouteName
-import com.android.dd.wanandroidcompose.data.AccountManager
 import com.android.dd.wanandroidcompose.data.entity.Article
-import com.dd.basiccompose.controller.LocalNavController
-import com.dd.basiccompose.navigation.go
 import com.dd.basiccompose.widget.DefaultList
 
 
 @Composable
-fun ProjectChileScreen(
-    cid: Int,
-    viewModel: ProjectChildViewModel = hiltViewModel(key = cid.toString()),
-    nav: NavHostController = LocalNavController.current,
-    showToast: (String) -> Unit = {},
+internal fun ProjectChileScreen(
+    pagingData: LazyPagingItems<Article>,
+    onItemClick: ((String, String) -> Unit),
+    onCollectItem: ((Article) -> Unit)
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val pagingData = uiState.data?.collectAsLazyPagingItems()
-    LaunchedEffect(key1 = cid) {
-        if (pagingData == null) {
-            viewModel.getPaging(cid)
-        }
-    }
-    if (pagingData != null) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            DefaultList(
-                lazyPagingItems = pagingData,
-                lazyListState = uiState.lazyListState,
-            ) {
-                itemsIndexed(pagingData, { index, item -> item.databaseId }) { index, item ->
+    Box(modifier = Modifier.fillMaxSize()) {
+        DefaultList(
+            lazyPagingItems = pagingData,
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            itemsIndexed(pagingData, { index, item -> item.databaseId }) { index, item ->
+                item?.run {
                     ArticleProjectItem(
-                        item!!,
-                        onClick = {
-                            nav.go(RouteName.webArguments(item.link, item.title))
+                        item,
+                        onItemClick = {
+                            onItemClick.invoke(item.link, item.title)
                         },
-                        collectOnClick = {
-                            if (AccountManager.isLogin) {
-                                viewModel.collection(item)
-                            } else {
-                                showToast.invoke("请先登录~")
-                            }
+                        onCollectItem = {
+                            onCollectItem.invoke(item)
                         }
                     )
                 }
+
             }
         }
     }
 }
 
 @Composable
-fun ArticleProjectItem(article: Article, onClick: (() -> Unit), collectOnClick: (() -> Unit)) {
+fun ArticleProjectItem(article: Article, onItemClick: (() -> Unit), onCollectItem: (() -> Unit)) {
     Column(modifier = Modifier
         .fillMaxWidth()
-        .clickable { onClick.invoke() }) {
+        .clickable { onItemClick.invoke() }) {
         Row(
             modifier = Modifier
                 .padding(20.dp)
@@ -123,7 +103,7 @@ fun ArticleProjectItem(article: Article, onClick: (() -> Unit), collectOnClick: 
                         )
                     }
                     IconButton(onClick = {
-                        collectOnClick.invoke()
+                        onCollectItem.invoke()
                     }) {
                         Icon(
                             Icons.Filled.Favorite,

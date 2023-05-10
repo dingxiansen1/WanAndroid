@@ -14,12 +14,11 @@ import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import com.android.dd.wanandroidcompose.R
-import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
 import com.android.dd.wanandroidcompose.ui.home.main.ArticleItem
 import com.android.dd.wanandroidcompose.ui.project.child.ArticleProjectItem
+import com.android.dd.wanandroidcompose.ui.web.navigation.navigateToWeb
 import com.dd.basiccompose.controller.LocalNavController
-import com.dd.basiccompose.navigation.go
 import com.dd.basiccompose.widget.DefaultList
 import com.dd.basiccompose.widget.DefaultTopBarBack
 import kotlinx.coroutines.launch
@@ -79,10 +78,10 @@ fun HistoryScreen(
                         if (item.envelopePic.isEmpty()) {
                             ArticleItem(
                                 item,
-                                onClick = {
-                                    nav.go(RouteName.webArguments(item.link, item.title))
+                                onItemClick = {
+                                    nav.navigateToWeb(item.link, item.title)
                                 },
-                                collectOnClick = {
+                                onCollectItem = {
                                     if (AccountManager.isLogin) {
                                         viewModel.collection(item)
                                     } else {
@@ -93,10 +92,10 @@ fun HistoryScreen(
                         } else {
                             ArticleProjectItem(
                                 item,
-                                onClick = {
-                                    nav.go(RouteName.webArguments(item.link, item.title))
+                                onItemClick = {
+                                    nav.navigateToWeb(item.link, item.title)
                                 },
-                                collectOnClick = {
+                                onCollectItem = {
                                     if (AccountManager.isLogin) {
                                         viewModel.collection(item)
                                     } else {

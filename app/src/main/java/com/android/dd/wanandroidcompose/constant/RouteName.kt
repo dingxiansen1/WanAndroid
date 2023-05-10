@@ -4,7 +4,6 @@ package com.android.dd.wanandroidcompose.constant
 object RouteName {
     const val SeriesDesc = "SeriesDesc"
     const val TutorialDesc = "TutorialDesc"
-    const val Web = "Web"
     const val Collection = "Collection"
     const val History = "History"
     const val Tool = "Tool"
@@ -37,10 +36,4 @@ object RouteName {
         return TutorialDesc + "?cid=${cid}"
     }
 
-    fun webArguments(
-        link: String,
-        title: String,
-    ): String {
-        return Web + "?link=${link}&title=${title}"
-    }
 }

@@ -16,7 +16,7 @@ import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.widget.WebViewScreen
 
 @Composable
-fun WebScreen(
+fun WebRoute(
     webUrl: String,
     title: String?,
     navCtrl: NavHostController = LocalNavController.current,

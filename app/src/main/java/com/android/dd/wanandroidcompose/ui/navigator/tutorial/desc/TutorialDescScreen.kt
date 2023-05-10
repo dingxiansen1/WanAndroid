@@ -18,6 +18,7 @@ import androidx.navigation.NavHostController
 import com.android.dd.wanandroidcompose.R
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.entity.Article
+import com.android.dd.wanandroidcompose.ui.web.navigation.navigateToWeb
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.navigation.go
 import com.dd.basiccompose.widget.DefaultTopBarBack
@@ -41,7 +42,7 @@ fun TutorialDescScreen(
             ) {
                 itemsIndexed(uiState, { index, item -> item.id }) { index, item ->
                     TutorialDescItem(item) {
-                        nav.go(RouteName.webArguments(item.link, item.title))
+                        nav.navigateToWeb(item.link, item.title)
                     }
                 }
             }

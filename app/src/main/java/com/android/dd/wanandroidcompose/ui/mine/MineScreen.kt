@@ -26,6 +26,7 @@ import com.android.dd.wanandroidcompose.data.AccountManager
 import com.android.dd.wanandroidcompose.data.AccountState
 import com.android.dd.wanandroidcompose.data.isLogin
 import com.android.dd.wanandroidcompose.ui.login.navigation.navigateToLogin
+import com.android.dd.wanandroidcompose.ui.web.navigation.navigateToWeb
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.ext.clickableNoRipple
 import com.dd.basiccompose.navigation.go
@@ -162,12 +163,7 @@ fun MineScreen(
                         Icons.Outlined.Cloud,
                         stringResource(id = R.string.project_address)
                     ) {
-                        nav.go(
-                            RouteName.webArguments(
-                                "https://github.com/dingxiansen1/WanAndroid",
-                                "项目地址"
-                            )
-                        )
+                        nav.navigateToWeb("https://github.com/dingxiansen1/WanAndroid","项目地址")
                     }
 
                     MineColumnItem(

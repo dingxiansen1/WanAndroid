@@ -9,11 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.android.dd.wanandroidcompose.ui.author.AuthorScreen
+import com.android.dd.wanandroidcompose.ui.author.AuthorRoute
 import com.android.dd.wanandroidcompose.ui.home.HomeMainScreen
 import com.android.dd.wanandroidcompose.ui.mine.MineScreen
 import com.android.dd.wanandroidcompose.ui.navigator.NavigatorMainScreen
-import com.android.dd.wanandroidcompose.ui.project.ProjectScreen
+import com.android.dd.wanandroidcompose.ui.project.ProjectRoute
 
 @Composable
 fun MainRoute(
@@ -87,12 +87,12 @@ fun MainScreen(
                 0 -> HomeMainScreen() {
                     showToast.invoke(it)
                 }
-                1 -> ProjectScreen() {
-                    showToast.invoke(it)
-                }
-                2 -> AuthorScreen() {
-                    showToast.invoke(it)
-                }
+                1 -> ProjectRoute(
+                    showToast = showToast::invoke
+                )
+                2 -> AuthorRoute(
+                    showToast = showToast::invoke
+                )
                 3 -> NavigatorMainScreen()
                 4 -> MineScreen() {
                     showToast.invoke(it)

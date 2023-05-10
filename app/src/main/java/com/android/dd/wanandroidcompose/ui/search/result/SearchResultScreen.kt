@@ -20,6 +20,7 @@ import com.android.dd.wanandroidcompose.R
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
 import com.android.dd.wanandroidcompose.ui.home.main.ArticleItem
+import com.android.dd.wanandroidcompose.ui.web.navigation.navigateToWeb
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.ext.clickableNoRipple
 import com.dd.basiccompose.navigation.go
@@ -114,10 +115,10 @@ fun SearchResultScreen(
                 itemsIndexed(pagingData, { index, item -> item.id }) { index, item ->
                     ArticleItem(
                         item!!,
-                        onClick = {
-                            nav.go(RouteName.webArguments(item.link, item.title))
+                        onItemClick = {
+                            nav.navigateToWeb(item.link, item.title)
                         },
-                        collectOnClick = {
+                        onCollectItem = {
                             if (AccountManager.isLogin) {
                                 viewModel.collection(item)
                             } else {

@@ -34,11 +34,11 @@ import com.android.dd.wanandroidcompose.ui.main.navigation.mainScreen
 import com.android.dd.wanandroidcompose.ui.message.MessageScreen
 import com.android.dd.wanandroidcompose.ui.navigator.series.desc.SeriesDescScreen
 import com.android.dd.wanandroidcompose.ui.navigator.tutorial.desc.TutorialDescScreen
-import com.android.dd.wanandroidcompose.ui.search.result.navigation.searchResultScreen
 import com.android.dd.wanandroidcompose.ui.search.navigation.searchScreen
+import com.android.dd.wanandroidcompose.ui.search.result.navigation.searchResultScreen
 import com.android.dd.wanandroidcompose.ui.setting.SettingScreen
 import com.android.dd.wanandroidcompose.ui.tool.ToolScreen
-import com.android.dd.wanandroidcompose.ui.web.WebScreen
+import com.android.dd.wanandroidcompose.ui.web.navigation.webScreen
 import com.android.dd.wanandroidcompose.utils.net.NetworkUtils
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.theme.DefaultTheme
@@ -130,16 +130,7 @@ class MainActivity : AppCompatActivity() {
             //搜索结果
             searchResultScreen()
             //Web页面
-            composable(
-                route = RouteName.Web + "?link={link}&title={title}",
-                arguments = listOf(
-                    navArgument("link") { type = NavType.StringType },
-                    navArgument("title") { type = NavType.StringType })
-            ) {
-                val link = it.arguments?.getString("link") ?: "https://www.wanandroid.com"
-                val title = it.arguments?.getString("title")
-                WebScreen(link, title)
-            }
+            webScreen()
             //体系详情页面
             composable(
                 RouteName.SeriesDesc + "?cid={cid}",

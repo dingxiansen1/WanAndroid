@@ -10,6 +10,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.entity.MsgBean
+import com.android.dd.wanandroidcompose.ui.web.navigation.navigateToWeb
 import com.android.dd.wanandroidcompose.widget.EmptyItem
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.navigation.go
@@ -35,7 +36,7 @@ fun UnReadMessageScreen(
             itemsIndexed(pagingData, { index, item -> item }) { index, item ->
                 item?.let {
                     MessageItem(item) {
-                        nav.go(RouteName.webArguments(item.fullLink, ""))
+                        nav.navigateToWeb(item.fullLink, "")
                     }
                 }
             }

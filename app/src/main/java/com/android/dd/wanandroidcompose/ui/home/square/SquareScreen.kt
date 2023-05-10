@@ -16,6 +16,7 @@ import androidx.paging.compose.itemsIndexed
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
 import com.android.dd.wanandroidcompose.ui.home.main.ArticleItem
+import com.android.dd.wanandroidcompose.ui.web.navigation.navigateToWeb
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.navigation.go
 import com.dd.basiccompose.widget.DefaultList
@@ -63,10 +64,10 @@ fun SquareScreen(
             itemsIndexed(pagingData, { index, item -> item.databaseId }) { index, item ->
                 ArticleItem(
                     item!!,
-                    onClick = {
-                        nav.go(RouteName.webArguments(item.link, item.title))
+                    onItemClick = {
+                        nav.navigateToWeb(item.link, item.title)
                     },
-                    collectOnClick = {
+                    onCollectItem = {
                         if (AccountManager.isLogin) {
                             viewModel.collection(item)
                         } else {

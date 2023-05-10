@@ -17,10 +17,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.android.dd.wanandroidcompose.R
-import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.entity.ToolBean
+import com.android.dd.wanandroidcompose.ui.web.navigation.navigateToWeb
 import com.dd.basiccompose.controller.LocalNavController
-import com.dd.basiccompose.navigation.go
 import com.dd.basiccompose.widget.DefaultTopBarBack
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,7 +45,7 @@ fun ToolScreen(
                     uiState.list,
                     { index: Int, item: ToolBean -> item.id }) { index, item ->
                     ToolItem(item) {
-                        nav.go(RouteName.webArguments(item.link, item.name))
+                        nav.navigateToWeb(item.link, item.name)
                     }
                 }
 

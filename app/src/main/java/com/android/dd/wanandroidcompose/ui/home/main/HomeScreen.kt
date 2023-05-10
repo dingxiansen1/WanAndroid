@@ -24,6 +24,7 @@ import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.AccountManager
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.data.entity.HomeBanner
+import com.android.dd.wanandroidcompose.ui.web.navigation.navigateToWeb
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.navigation.go
 import com.dd.basiccompose.widget.Banner
@@ -73,17 +74,17 @@ fun HomeScreen(
             item(key = "banner") {
                 Box(modifier = Modifier.animateItemPlacement()) {
                     BannerItem(banner) { url, title ->
-                        nav.go(RouteName.webArguments(url, title))
+                        nav.navigateToWeb(url, title)
                     }
                 }
             }
             itemsIndexed(uiState, { index, item -> item.databaseId }) { index, item ->
                 ArticleItem(
                     item!!,
-                    onClick = {
-                        nav.go(RouteName.webArguments(item.link, item.title))
+                    onItemClick = {
+                        nav.navigateToWeb(item.link, item.title)
                     },
-                    collectOnClick = {
+                    onCollectItem = {
                         if (AccountManager.isLogin) {
                             viewModel.collection(item)
                         } else {
@@ -114,10 +115,10 @@ fun BannerItem(banner: List<HomeBanner>, onClick: ((String, String) -> Unit)) {
 
 
 @Composable
-fun ArticleItem(article: Article, onClick: (() -> Unit), collectOnClick: (() -> Unit)) {
+fun ArticleItem(article: Article, onItemClick: (() -> Unit), onCollectItem: (() -> Unit)) {
     Column(modifier = Modifier
         .fillMaxWidth()
-        .clickable { onClick.invoke() }) {
+        .clickable { onItemClick.invoke() }) {
         Row(
             modifier = Modifier
                 .padding(20.dp)
@@ -166,7 +167,7 @@ fun ArticleItem(article: Article, onClick: (() -> Unit), collectOnClick: (() -> 
                 }
             }
             IconButton(onClick = {
-                collectOnClick.invoke()
+                onCollectItem.invoke()
             }) {
                 Icon(
                     Icons.Filled.Favorite,

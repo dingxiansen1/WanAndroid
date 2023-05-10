@@ -22,6 +22,7 @@ import androidx.paging.compose.itemsIndexed
 import com.android.dd.wanandroidcompose.R
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.entity.CollectBean
+import com.android.dd.wanandroidcompose.ui.web.navigation.navigateToWeb
 import com.android.dd.wanandroidcompose.widget.EmptyItem
 import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.navigation.go
@@ -76,7 +77,7 @@ fun CollectionScreen(
                         CollectionItem(
                             item!!,
                             onClick = {
-                                nav.go(RouteName.webArguments(item.link, item.title))
+                                nav.navigateToWeb(item.link, item.title)
                             },
                             collectOnClick = {
                                 viewModel.collection(item)
