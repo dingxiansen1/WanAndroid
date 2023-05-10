@@ -15,7 +15,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import coil.compose.AsyncImage
 import com.android.dd.wanandroidcompose.data.entity.Article
-import com.android.dd.wanandroidcompose.ext.rememberLazyListState
+import com.dd.basiccompose.ext.rememberLazyListState
 import com.dd.basiccompose.widget.DefaultList
 
 

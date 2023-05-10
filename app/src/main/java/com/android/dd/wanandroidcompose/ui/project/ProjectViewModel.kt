@@ -9,8 +9,8 @@ import androidx.paging.cachedIn
 import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.data.entity.Category
-import com.android.dd.wanandroidcompose.ext.createIntPagingSource
 import com.android.dd.wanandroidcompose.ui.collection.CollectionRepository
+import com.dd.basiccompose.ext.createIntPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
