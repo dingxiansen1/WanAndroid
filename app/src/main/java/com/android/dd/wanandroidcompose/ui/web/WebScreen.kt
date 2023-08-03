@@ -34,7 +34,7 @@ fun WebRoute(
             viewModel.addHistory(it)
         }
     }
-    WebViewScreen(webUrl = webUrl, title = title, navCtrl = navCtrl) {
+    WebViewScreen(webUrl = webUrl, title = title) {
         IconButton(onClick = {
             menuState = menuState.not()
         }) {

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">玩安卓</string>
-
+    <string name="one_more_press_2_back">再按一次返回桌面</string>
 
     <string name="home">主页</string>
     <string name="project">项目</string>

@@ -2,6 +2,8 @@ package com.android.dd.wanandroidcompose
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -55,12 +57,15 @@ import com.dd.basiccompose.controller.LocalNavController
 import com.dd.basiccompose.theme.DefaultTheme
 import com.dd.basiccompose.theme.navigation.themeScreen
 import com.dd.basiccompose.widget.DefaultAppSnackbar
+import com.dd.common.web.WebViewManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private var exitTime = 0L
 
     private val viewModel: AppViewModel by viewModels()
 
@@ -81,7 +86,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
+        //WebView预加载
+        WebViewManager.prepare(applicationContext)
+        //双击返回键回退桌面
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (System.currentTimeMillis() - exitTime > 2000) {
+                    exitTime = System.currentTimeMillis()
+                    val msg = getString(R.string.one_more_press_2_back)
+                    Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
+                } else {
+                    moveTaskToBack(true)
+                }
+            }
+        })
         setContent {
             DefaultTheme {
                 WanApp()
@@ -127,6 +145,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        WebViewManager.destroy()
+    }
+
 }
 
 @Composable
