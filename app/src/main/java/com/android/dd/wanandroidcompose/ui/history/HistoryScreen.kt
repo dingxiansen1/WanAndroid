@@ -36,20 +36,9 @@ fun HistoryScreen(
         derivedStateOf { uiState.lazyListState.firstVisibleItemIndex > 10 }
     }
     val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
-    LaunchedEffect(Unit) {
-        viewModel.toastMsg.collect {
-            snackbarHostState.showSnackbar(
-                it
-            )
-        }
-    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        snackbarHost = {
-            SnackbarHost(snackbarHostState)
-        },
         topBar = {
             DefaultTopBarBack(title = stringResource(id = R.string.browsing_history))
         },

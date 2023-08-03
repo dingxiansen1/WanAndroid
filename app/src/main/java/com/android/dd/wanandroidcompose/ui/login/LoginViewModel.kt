@@ -6,6 +6,8 @@ import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.constant.Constant
 import com.android.dd.wanandroidcompose.data.AppDataStore
 import com.android.dd.wanandroidcompose.data.serializer.user
+import com.android.dd.wanandroidcompose.manager.SnackbarManager
+import com.android.dd.wanandroidcompose.manager.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -15,6 +17,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val repository: UserRepository,
     private val application: Application,
+    private val snackbarManager: SnackbarManager,
 ) : BaseViewModel() {
 
     var uiState = MutableStateFlow(
@@ -69,6 +72,11 @@ class LoginViewModel @Inject constructor(
                 }
             }
         }
+    }
+    fun showToast(msg: String) {
+        snackbarManager.showMessage(
+            uiText = UiText.DynamicString(msg)
+        )
     }
 }
 

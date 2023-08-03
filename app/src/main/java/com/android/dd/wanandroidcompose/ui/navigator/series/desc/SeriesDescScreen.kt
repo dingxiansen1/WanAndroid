@@ -38,21 +38,10 @@ fun SeriesDescScreen(
         derivedStateOf { uiState.lazyListState.firstVisibleItemIndex > 10 }
     }
     val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
-    LaunchedEffect(Unit) {
-        viewModel.toastMsg.collect {
-            snackbarHostState.showSnackbar(
-                it
-            )
-        }
-    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         contentColor = MaterialTheme.colorScheme.onBackground,
-        snackbarHost = {
-            SnackbarHost(snackbarHostState)
-        },
         topBar = {
             DefaultTopBarBack(title = stringResource(id = R.string.seriesDesc))
         },

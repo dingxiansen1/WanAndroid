@@ -10,6 +10,8 @@ import com.android.dd.wanandroidcompose.constant.RemoteKeyType
 import com.android.dd.wanandroidcompose.data.AppDatabase
 import com.android.dd.wanandroidcompose.data.dao.ArticleDao
 import com.android.dd.wanandroidcompose.data.entity.Article
+import com.android.dd.wanandroidcompose.manager.SnackbarManager
+import com.android.dd.wanandroidcompose.manager.UiText
 import com.android.dd.wanandroidcompose.ui.collection.CollectionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +23,7 @@ import javax.inject.Inject
 class HistoryViewModel @Inject constructor(
     private val collectionRepository: CollectionRepository,
     private val historyDao: ArticleDao,
+    private val snackbarManager: SnackbarManager,
 ) : BaseViewModel() {
 
     val uiState = MutableStateFlow(HistoryUiState(getPager()))
@@ -45,6 +48,12 @@ class HistoryViewModel @Inject constructor(
         viewModelScope.launch {
             collectionRepository.collectArticle(article)
         }
+    }
+
+    fun showToast(msg: String) {
+        snackbarManager.showMessage(
+            uiText = UiText.DynamicString(msg)
+        )
     }
 }
 

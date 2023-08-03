@@ -8,6 +8,8 @@ import com.android.dd.wanandroidcompose.BaseViewModel
 import com.android.dd.wanandroidcompose.constant.RouteName
 import com.android.dd.wanandroidcompose.data.entity.Article
 import com.android.dd.wanandroidcompose.data.entity.SearchHistory
+import com.android.dd.wanandroidcompose.manager.SnackbarManager
+import com.android.dd.wanandroidcompose.manager.UiText
 import com.android.dd.wanandroidcompose.ui.collection.CollectionRepository
 import com.android.dd.wanandroidcompose.ui.search.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +23,7 @@ class SearchResultViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val repository: SearchRepository,
     private val collectionRepository: CollectionRepository,
+    private val snackbarManager: SnackbarManager,
 ) : BaseViewModel() {
 
     val key = savedStateHandle[RouteName.Arguments.key] ?: ""
@@ -53,6 +56,11 @@ class SearchResultViewModel @Inject constructor(
         }
     }
 
+    fun showToast(msg: String) {
+        snackbarManager.showMessage(
+            uiText = UiText.DynamicString(msg)
+        )
+    }
 }
 
 data class SearchResultUiState(

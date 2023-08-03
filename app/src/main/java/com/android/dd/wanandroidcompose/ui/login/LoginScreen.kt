@@ -43,17 +43,8 @@ fun LoginRoute(
     nav: NavHostController = LocalNavController.current,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val snackbarHostState = remember { SnackbarHostState() }
-    LaunchedEffect(Unit) {
-        viewModel.toastMsg.collect {
-            snackbarHostState.showSnackbar(
-                it
-            )
-        }
-    }
     LoginScreen(
         uiState = uiState,
-        snackbarHostState = snackbarHostState,
         navigateUp = nav::navigateUp,
         updateAccount = viewModel::updateAccount,
         updatePassword = viewModel::updatePassword,
@@ -67,7 +58,6 @@ fun LoginRoute(
 @Composable
 fun LoginScreen(
     uiState: LoginUiState,
-    snackbarHostState: SnackbarHostState,
     navigateUp: () -> Unit,
     updateAccount: (String) -> Unit,
     updatePassword: (String) -> Unit,
@@ -81,9 +71,6 @@ fun LoginScreen(
     }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        snackbarHost = {
-            SnackbarHost(snackbarHostState)
-        },
     ) {
         Column(modifier = Modifier.padding(it)) {
             Column(

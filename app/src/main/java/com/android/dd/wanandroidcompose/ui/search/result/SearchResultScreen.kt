@@ -41,19 +41,8 @@ fun SearchResultScreen(
         derivedStateOf { uiState.lazyListState.firstVisibleItemIndex > 10 }
     }
     val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
-    LaunchedEffect(Unit) {
-        viewModel.toastMsg.collect {
-            snackbarHostState.showSnackbar(
-                it
-            )
-        }
-    }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        snackbarHost = {
-            SnackbarHost(snackbarHostState)
-        },
         containerColor = MaterialTheme.colorScheme.background,
         contentColor = MaterialTheme.colorScheme.onBackground,
         topBar = {

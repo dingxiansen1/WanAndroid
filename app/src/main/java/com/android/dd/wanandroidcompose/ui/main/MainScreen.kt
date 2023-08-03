@@ -23,19 +23,9 @@ fun MainRoute(
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val snackbarHostState = remember { SnackbarHostState() }
-    LaunchedEffect(Unit) {
-        viewModel.toastMsg.collect {
-            snackbarHostState.showSnackbar(
-                it
-            )
-        }
-    }
-
     MainScreen(
         items = items,
         uiState = uiState,
-        snackbarHostState = snackbarHostState,
         showToast = viewModel::showToast,
         updateSelectIndex = viewModel::updateSelectIndex,
     )
@@ -47,7 +37,6 @@ fun MainRoute(
 fun MainScreen(
     items: List<NavigationBarItemData>,
     uiState: MainUiState,
-    snackbarHostState: SnackbarHostState,
     showToast: (String) -> Unit,
     updateSelectIndex: (Int) -> Unit,
 ) {
@@ -55,9 +44,6 @@ fun MainScreen(
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
-        snackbarHost = {
-            SnackbarHost(snackbarHostState)
-        },
         containerColor = MaterialTheme.colorScheme.background,
         bottomBar = {
             NavigationBar {

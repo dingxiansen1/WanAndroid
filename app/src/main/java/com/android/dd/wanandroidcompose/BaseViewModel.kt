@@ -8,13 +8,4 @@ import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
 
-    private val _toastMsg = Channel<String>(Channel.BUFFERED)
-    val toastMsg = _toastMsg.receiveAsFlow()
-    fun showToast(msg: String) {
-        viewModelScope.launch {
-            _toastMsg.send(msg)
-        }
-
-    }
-
 }
